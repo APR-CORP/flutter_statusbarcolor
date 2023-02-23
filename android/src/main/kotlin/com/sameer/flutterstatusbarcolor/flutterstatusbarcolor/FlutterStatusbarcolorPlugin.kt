@@ -25,7 +25,8 @@ class FlutterStatusbarcolorPlugin : FlutterPlugin, MethodCallHandler, ActivityAw
     private var activity: Activity? = null
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "plugins.sameer.com/statusbar")
+        channel =
+            MethodChannel(flutterPluginBinding.binaryMessenger, "plugins.sameer.com/statusbar")
         channel.setMethodCallHandler(this)
     }
 
@@ -49,9 +50,15 @@ class FlutterStatusbarcolorPlugin : FlutterPlugin, MethodCallHandler, ActivityAw
                 val statusBarColor: Int = call.argument("color")!!
                 val animate: Boolean = call.argument("animate")!!
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    if (animate) {
-                        val colorAnim = ValueAnimator.ofArgb(activity!!.window.statusBarColor, statusBarColor)
-                        colorAnim.addUpdateListener { anim -> activity!!.window.statusBarColor = anim.animatedValue as Int }
+                    if (animate && activity != null) {
+                        val colorAnim =
+                            ValueAnimator.ofArgb(activity!!.window.statusBarColor, statusBarColor)
+                        colorAnim.addUpdateListener { anim ->
+                            if (activity != null) {
+                                activity!!.window.statusBarColor =
+                                    anim.animatedValue as Int
+                            }
+                        }
                         colorAnim.duration = 300
                         colorAnim.start()
                     } else {
@@ -64,9 +71,11 @@ class FlutterStatusbarcolorPlugin : FlutterPlugin, MethodCallHandler, ActivityAw
                 val usewhiteforeground: Boolean = call.argument("whiteForeground")!!
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (usewhiteforeground) {
-                        activity!!.window.decorView.systemUiVisibility = activity!!.window.decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+                        activity!!.window.decorView.systemUiVisibility =
+                            activity!!.window.decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
                     } else {
-                        activity!!.window.decorView.systemUiVisibility = activity!!.window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                        activity!!.window.decorView.systemUiVisibility =
+                            activity!!.window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                     }
                 }
                 result.success(null)
@@ -83,8 +92,13 @@ class FlutterStatusbarcolorPlugin : FlutterPlugin, MethodCallHandler, ActivityAw
                 val animate: Boolean = call.argument("animate")!!
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     if (animate) {
-                        val colorAnim = ValueAnimator.ofArgb(activity!!.window.navigationBarColor, navigationBarColor)
-                        colorAnim.addUpdateListener { anim -> activity!!.window.navigationBarColor = anim.animatedValue as Int }
+                        val colorAnim = ValueAnimator.ofArgb(
+                            activity!!.window.navigationBarColor,
+                            navigationBarColor
+                        )
+                        colorAnim.addUpdateListener { anim ->
+                            activity!!.window.navigationBarColor = anim.animatedValue as Int
+                        }
                         colorAnim.setDuration(300)
                         colorAnim.start()
                     } else {
@@ -97,9 +111,11 @@ class FlutterStatusbarcolorPlugin : FlutterPlugin, MethodCallHandler, ActivityAw
                 val usewhiteforeground: Boolean = call.argument("whiteForeground")!!
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     if (usewhiteforeground) {
-                        activity!!.window.decorView.systemUiVisibility = activity!!.window.decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
+                        activity!!.window.decorView.systemUiVisibility =
+                            activity!!.window.decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
                     } else {
-                        activity!!.window.decorView.systemUiVisibility = activity!!.window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                        activity!!.window.decorView.systemUiVisibility =
+                            activity!!.window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
                     }
                 }
                 result.success(null)
