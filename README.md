@@ -1,4 +1,4 @@
-# flutter_statusbarcolor_ns
+# flutter_statusbarcolor_ns(에이지알에서 사용 할 외부 패키지)
 
 [![pub package](https://img.shields.io/pub/v/flutter_statusbarcolor_ns?style=for-the-badge)](https://pub.dev/packages/flutter_statusbarcolor)
 
