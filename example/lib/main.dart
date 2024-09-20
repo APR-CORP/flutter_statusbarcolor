@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
+import 'package:flutter_statusbarcolor_ns_apr/flutter_statusbarcolor_ns_apr.dart';
 
 main() => runApp(MyApp());
 
